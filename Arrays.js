@@ -53,52 +53,35 @@ console.log(searchPeople);
 
 // 4 Ejercicio Hacer el sumatorio de un array numérico ( reduce ):
 
-let miArray = ['pepe', 2, 'evaristo', 4, 'eva'];
-let newArray = [];
-for (let i=0; i<miArray.length; i++) {
-    if (typeof miArray[i] === 'number') {
-       newArray.push(miArray[i]);
+let total = miArray.reduce((acum, num) => {
+    if (typeof  num === 'Number') {
+      return acum + num;
     }
-}
-
-let sumNumArray = newArray.reduce((function(acum, num) {return acum + num}), 0);
-
-console.log(sumNumArray);
+    return acum;
+  })
 
 // 5 Contar el numero de elementos que son string en el siguiente array (reduce):
 
-let miArray = ['pepe', 2, 'evaristo', 4, 'eva'];
-let newArray = [];
-for (let i=0; i<miArray.length; i++) {
-    if (typeof miArray[i] === 'string') {
-       newArray.push(1);
-    }
-}
-
-let sumNumArray = newArray.reduce((function(acum, num) {return acum + num}), 0);
-
-console.log(sumNumArray);
-
-
-
+const miArray = ['pepe', 2, 'evaristo', 4, 'eva'];
+const totalStrings = miArray.reduce((acum, el) => {
+  if (isNaN(el)) {
+    acum++;
+  }
+}, 0)
 
 
 // 6 Ejercicio Modificar array usando push.
 
 const arrayOriginal = ['Manzanas', 'Peras', 'Castañas']; 
 
-let newArray = arrayOriginal.push('Nueces');
+arrayOriginal.push('Nueces');
 console.log(arrayOriginal);
 
 // 7 Ejercicio Modificar array usando concat.
 
 const arrayOriginal = ['Manzanas', 'Peras', 'Castañas']; 
 
-const array = ['Nueces'];
-
-let result = arrayOriginal.concat(array);
-
-console.log(result);
+const result = arrayOriginal.concat(['Nueces']);
 
 // 8 Ejercicio Modificar array usando splice.
 
@@ -114,7 +97,7 @@ console.log(arrayOriginal);
 
 const arrayOriginal = ['Manzanas', 'Peras', 'Castañas'];
 
-arrayOriginal.splice(3,1, 'Nueces');
+arrayOriginal.splice(3, 0, 'Nueces');
 console.log(arrayOriginal);
 
 
@@ -126,8 +109,6 @@ console.log(arrayOriginal);
 //Ejercicio ConStruye un conjunto con tres frutas: Pera, Manzana y Naranja
 
 let fruits = new Set(['Pera', 'Manzana', 'Naranja']);
-
-console.log(fruits);
 
 
 //Ejercicio Comprueba si Naranja esta dentro del conjunto que has creado antes.
@@ -147,8 +128,8 @@ console.log(fruits.add('Granada'));
 //Ejercicio Crea un array con los elementos que hay en el conjunto y devuelvelo ordenados.
 
 let fruits = new Set(['Pera', 'Manzana', 'Naranja']);
-let myArray = ['Pera', 'Manzana', 'Naranja'];
-console.log(myArray.sort();)
+const array = Array.from(fruits);
+array.sort();
 
 //Ejercicio Borra la manzana.
 
@@ -162,41 +143,49 @@ console.log(fruits.delete('Manzana'));
 //----------------------MAP-------------------------
 
 //Ejercicio Construye una guia telefonica con los compañeros de clase. Toma como clave el numero de teléfono y como valor el nombre del compañero.
+
+const agenda = new Map();
+agenda.set(654323232, 'Pepe');
+
 //Ejercicio Crea una función que compruebe que un número está dentro de la guía.
-//Ejercicio Crea una función que dado un nombre compruebe que la guia contiene algún nombre que contenga el nombre pasado por parámetro.
-let phoneGuide = new Map([[612889966, 'Lucho'], [677332266, 'Edu'], [655889834, 'Álvaro'], [651234533, 'Javi'], [654443322, 'Irene']]);
-function checkName(name) {
-    let checked = false;
-    phoneGuide.forEach(value => {
-        if(value === name) {
-            checked = true;
-        }
-    })
-    return checked;
+
+function checkNumber(number) {
+	return agenda.has(number);
 }
-checkName('Lucho');
+checkNumber(654323232);
+//Ejercicio Crea una función que dado un nombre compruebe que la guia contiene algún nombre que contenga el nombre pasado por parámetro.
+function checkName(name) {
+	let checked = false;
+	agenda.forEach(value =>{
+  	if (value === name) {
+    	checked = true;
+    }
+  })
+  return checked;
+}
 
 
 //Ejercicio Añade un nuevo compañero ficticio con tu número de telefono. ¿Qué pasa?
 
-phoneGuide.set(657223399, 'Luis');
+agenda.set(654323232, 'Juan');
 
 //Ejercio Crea un array ordenado por nombre con valores { nombre, telefono } a partir de la guía.
 
-let phoneGuide = new Map([[612889966, 'Lucho'], [677332266, 'Edu'], [655889834, 'Álvaro'], [651234533, 'Javi'], [654443322, 'Irene']]);
+const data = [];
+const dataArray = [];
+agenda.forEach((value, key) => {
+  data.push({
+    name: value,
+    phone: key
+  })
+  dataArray.push([value, key]);
+})
 
-let phoneGuideArray = [];
-
-phoneGuide.forEach((value, key) => (phoneGuideArray.push([value, key])));
-
-phoneGuideArray.sort((a, b) => {
-    if(a[0] < b[0]) {
-        return -1;
-    } else if(a[0] > b[0]) {
-        return 1;
-    } else {
-        return 0;
-    }
-});
-
-console.log(phoneGuideArray);
+dataArray.sort((a, b) => {
+  if (a[0] < b[0]) {
+    return -1;
+  } else if (a[0] > b[0]) {
+    return 1;
+  }
+  return 0;
+})
