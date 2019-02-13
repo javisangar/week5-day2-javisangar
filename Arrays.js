@@ -189,3 +189,60 @@ dataArray.sort((a, b) => {
   }
   return 0;
 })
+
+
+
+//----------------------------Dates----------------------
+
+// 1 Ejercicio Realiza un script que escriba en el documento la fecha y hora actual
+
+// 2 Ejercicio Realiza un script que pida un nombre y dos apellidos e indique el tiempo que se tardó en introducir los datos. Para pedir los datos se puede utilizar la forma var nombre = prompt("Introduce el Nombre:"); que guardará en nombre el nombre sacando por pantalla una ventana donde introducirlos.
+
+// 3 Ejercicio Realiza un script pida un mes y año e imprima los dias de ese mes de la forma 1(miércoles), 2(jueves), ...
+
+const month = 1;
+const year = 2019;
+
+const date = new Date();
+date.setMonth(month);
+date.setFullYear(year);
+date.setDate(1);
+
+while(date.getMonth() === month) {
+    switch(date.getDay()) {
+     case 0:
+       console.log(`${date.getDate()} (Domingo)` );
+     break;
+   case 1:
+       console.log(`${date.getDate()} (Lunes)` );
+     break;
+   case 2:
+       console.log(`${date.getDate()} (Martes)` );
+     break;
+   case 3:
+       console.log(`${date.getDate()} (Miercoles)` );
+     break;
+   case 4:
+       console.log(`${date.getDate()} (Jueves)` );
+     break;
+   case 5:
+       console.log(`${date.getDate()} (Viernes)` );
+     break;
+   case 6:
+       console.log(`${date.getDate()} (Sabado)` );
+     break;
+ }
+  date.setDate(date.getDate() + 1);
+}
+
+
+// 4 Ejercicio Dada la siguiente fecha 05/02/1985 calcula el día sumandole 30, 90 y 180 días.
+
+let date = new Date('05/02/1985');
+
+date.setDate(date.getDate() +  30);
+date =new Date('05/02/1985');
+
+date.setDate(date.getDate() +  90);
+date =new Date('05/02/1985');
+date.setDate(date.getDate() +  180);
